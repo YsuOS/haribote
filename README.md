@@ -48,3 +48,24 @@ nasm A.asm -o A.img
   - EDP : destination index
   - when you use higher bit of EAX, you need to shift 8 bits
 
+- Segment register (16 bit)
+  - ES : extra segment
+  - CS : code segment
+  - SS : stack segment
+  - DS : data segment
+  - FS : (no name) extra segment
+  - GS : (no name) extra segment
+
+- MOV WORD [678], 123
+  - 123 = 0x0000000001111011 = 00000000 01111011
+  - 01111011 stores address 678
+  - 00000000 stores address 679
+  - we can use BX, BP, SI, DI for indicating address
+
+- ADD SI, 1 : SI + 1
+- CMP : compare
+- JE jump if equal
+- INT : interrupt
+  - INT 0x10 : BIOS interrupt call. video services
+
+
