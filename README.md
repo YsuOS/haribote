@@ -12,8 +12,8 @@ nasm A.asm -o A.img
 
 - boot sector
   - PC reads first sector
-  - then reads last 2 bytes
-  - if the 2 bytes are 0x55, 0xaa, PC starts from first (= boot) sector?
+  - then reads last 2 bytes of the first sector
+  - if the 2 bytes are 0x55, 0xaa, PC starts from first (= boot) sector
 
 - ORG : alters the location counter
 - JMP : jump
