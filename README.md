@@ -67,5 +67,13 @@ nasm A.asm -o A.img
 - JE jump if equal
 - INT : interrupt
   - INT 0x10 : BIOS interrupt call. video services
+- JC : jump if carry. Jump, if carry flag is 1
 
+- floppy disk has 80 cylinders
+- 18 sectors in 1 cylinder
+- the disk have front and back
+- floppy disk is 1440KB(80 * 2 * 18 * 512KB)
 
+- MOV AL, [ES:BX] : ES * 16 + BX
+- if we don't use segment register when decide which memory address, the default segment is DS
+  - MOV AL, [SI] = MOV AL, [DS:SI]
