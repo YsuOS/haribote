@@ -29,9 +29,6 @@ entry:
     MOV     SS, AX
     MOV     SP, 0x7c00
     MOV     DS, AX
-    MOV     ES, AX
-
-    MOV     SI, msg
 
 MOV     AX, 0x0820
 MOV     ES, AX
@@ -45,6 +42,21 @@ MOV     BX, 0
 MOV     DL, 0x00
 INT     0x13
 JC      error
+;JNC     fin
+;ADD     SI, 1
+;CMP     SI, 5
+;JAE     error
+;MOV     AH, 0x00
+;MOV     DL, 0x00
+;INT     0x13
+;JMP     retry
+
+fin:
+    HLT
+    JMP fin
+
+error:
+    MOV     SI, msg
 
 putloop:
     MOV     AL, [SI]
@@ -56,15 +68,10 @@ putloop:
     INT     0x10
     JMP     putloop
 
-fin:
-    HLT
-    JMP fin
 
-error:
-    MOV     SI, msg
 msg:
     DB      0x0a, 0x0a
-    DB      "hello, world"
+    DB      "load error"
     DB      0x0a
     DB      0
 
