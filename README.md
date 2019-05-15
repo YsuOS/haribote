@@ -1,4 +1,3 @@
-nasm A.asm -o A.img
 
 # memo
 - DB : data byte
