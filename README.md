@@ -76,3 +76,5 @@
 - MOV AL, [ES:BX] : ES * 16 + BX
 - if we don't use segment register when decide which memory address, the default segment is DS
   - MOV AL, [SI] = MOV AL, [DS:SI]
+
+- JBE : jump if below or equal
