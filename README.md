@@ -78,3 +78,7 @@
   - MOV AL, [SI] = MOV AL, [DS:SI]
 
 - JBE : jump if below or equal
+- JB : jump if below
+- CYLS EQU 10 : CYLS=10
+- EQU : equal
+
