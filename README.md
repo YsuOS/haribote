@@ -82,3 +82,5 @@
 - CYLS EQU 10 : CYLS=10
 - EQU : equal
 
+- DB,DW,DD and ORG are not CPU instruction
+
