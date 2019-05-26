@@ -93,3 +93,6 @@
 
 - I wanna create haribote-OS by rust.
   - To do this, I create it by C following the book.
+
+- when 32 bit mode, we can use EAX, ECX, EDX freely
+
