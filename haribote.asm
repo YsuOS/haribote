@@ -23,7 +23,7 @@ VRAM    EQU     0x0ff8      ; グラフィックバッファの開始番地
 ; LED state on keyboardをBIOSから教えてもらう
 
         MOV     AH, 0x02
-        INV     0x16        ; keyboard BIOS
+        INT     0x16        ; keyboard BIOS
         MOV     [LEDS], AL
 
 fin:

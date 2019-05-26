@@ -4,7 +4,7 @@ default:
 ipl10.bin : ipl10.asm Makefile
 	nasm ipl10.asm -o ipl10.bin -l ipl10.lst
 
-hariote.sys : haribote.asm Makefile
+haribote.sys : haribote.asm Makefile
 	nasm	haribote.asm -o haribote.sys -l haribote.lst
 
 haribote.img : ipl10.bin haribote.sys Makefile

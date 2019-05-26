@@ -91,3 +91,5 @@
 - VRAM = video RAM
   - それぞれの番地が画面上の画素に対応していて、これを利用することで画面に絵を出すことができる
 
+- I wanna create haribote-OS by rust.
+  - To do this, I create it by C following the book.
