@@ -1,5 +1,8 @@
-
 # memo
+- edit binary file by vim
+  - `vim -b file.bin`
+  - `:%!xxd`
+  - `:%!xxd -r`
 - DB : data byte
   - write 1 byte directly?
 - DW : data word
@@ -83,4 +86,8 @@
 - EQU : equal
 
 - DB,DW,DD and ORG are not CPU instruction
+- BIOS can use only 16 bit mode
+
+- VRAM = video RAM
+  - それぞれの番地が画面上の画素に対応していて、これを利用することで画面に絵を出すことができる
 
