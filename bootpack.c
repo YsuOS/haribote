@@ -6,7 +6,7 @@ void HariMain(void)
     int i;
 
     for (i = 0xa0000; i <= 0xaffff; i++) {
-        _write_mem8( i, 15 ); /* MOV BYTE [i], 15 */
+        _write_mem8( i, i & 0x0f );
     }
 
     for(;;) {

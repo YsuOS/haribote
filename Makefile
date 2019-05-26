@@ -30,4 +30,4 @@ run :
 	make img
 	qemu-system-i386 -fda haribote.img
 clean:
-	rm *.bin *.lst *.sys *.img *.hrb
+	rm *.bin *.lst *.sys *.img *.hrb *.o

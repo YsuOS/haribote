@@ -2,4 +2,4 @@
 *.bin
 *.sys
 *.lst
-
+*.o
