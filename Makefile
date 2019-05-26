@@ -4,8 +4,14 @@ default:
 ipl10.bin : ipl10.asm Makefile
 	nasm ipl10.asm -o ipl10.bin -l ipl10.lst
 
-haribote.sys : haribote.asm Makefile
-	nasm	haribote.asm -o haribote.sys -l haribote.lst
+asmhead.bin : asmhead.asm Makefile
+	nasm asmhead.asm -o asmhead.bin -l asmhead.lst
+
+bootpack.hrb : bootpack.c har.ld Makefile
+	gcc -march=i486 -m32 -nostdlib -fno-pie -T har.ld bootpack.c -o bootpack.hrb
+
+haribote.sys : asmhead.bin bootpack.hrb  Makefile
+	cat asmhead.bin bootpack.hrb > haribote.sys
 
 haribote.img : ipl10.bin haribote.sys Makefile
 	mformat -f 1440 -C -B ipl10.bin -i haribote.img ::
@@ -21,11 +27,4 @@ run :
 	make img
 	qemu-system-i386 -fda haribote.img
 clean:
-	rm ipl10.bin
-	rm ipl10.lst
-	rm haribote.sys
-	rm haribote.lst
-
-src_only :
-	make clean
-	rm haribote.img
+	rm *.bin *.lst *.sys *.img *.hrb
