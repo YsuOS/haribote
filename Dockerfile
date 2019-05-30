@@ -1,7 +1,7 @@
 FROM ubuntu
 
 RUN apt update
-RUN apt install nasm mtools make
+RUN apt install -y nasm mtools make gcc
 
 WORKDIR /home/
 CMD make
