@@ -1,3 +1,4 @@
+//今回は8bit color なので，8bit (00000000-ffffffff)つまり16種類しか色が使えない
 # define COL8_000000    0
 # define COL8_FF0000    1
 # define COL8_00FF00    2
@@ -31,7 +32,7 @@ void HariMain(void)
     int xsize, ysize;
 
     init_palette();
-    vram = (char *) 0xa0000;
+    vram = (char *) 0xa0000;    // 0xa0000はVRAMの開始アドレス
     xsize = 320;
     ysize = 200;
 

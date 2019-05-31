@@ -25,6 +25,13 @@ io_stihlt:             ; void io_stihlt(void);
     HLT
     RET
 
+/*
+ * write_mem8:      ; void write_mem8(int addr, int data);
+ *      MOV     ECX, [ESP+4]    ; [ESP+4]にaddrが入っているのでそれをECXに読み込む
+ *      MOV     AL, [ESP+8]     ; [ESP+8]にdataが入っているのでそれをALに読み込む
+ *      MOV     [ECX], AL
+ *      RET
+ */
 io_in8:             ; int io_in8(int port);
     MOV     EDX, [ESP+4]    ; port
     MOV     EAX, 0

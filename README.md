@@ -96,3 +96,4 @@
 
 - when 32 bit mode, we can use EAX, ECX, EDX freely
 
+- C言語と連携するときは，EAX,ECX,EDXしか自由に使えない
