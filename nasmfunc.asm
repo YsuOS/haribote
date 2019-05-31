@@ -63,7 +63,7 @@ io_out32:             ; int io_out32(int port);
 io_load_eflags:        ; int io_load_eflags(void);
     PUSHFD              ; PUSH EFLAGSという意味
     POP     EAX
-    RET
+    RET                 ; C言語の規約では、RETしたときにEAXに入っていた値が関数の値とみなされる。
 
 io_store_eflags:        ; int io_store_eflags(int eflags);
     MOV     EAX, [ESP+4]
