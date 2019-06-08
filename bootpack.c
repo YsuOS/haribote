@@ -249,15 +249,17 @@ void putblock8_8(char *vram, int vxsize, int pxsize, int pysize,
 
 void init_gdtidt(void)
 {
-    struct SegmentDescriptor * gdt = (struct SegmentDescriptor *) 0x00270000;
+    struct SegmentDescriptor * gdt = (struct SegmentDescriptor *) 0x00270000; 
+    // 0x270000-0x27ffff 特に意味はない
     struct GateDescriptor * idt = (struct GateDescriptor *) 0x0026f800;
+    // 0x26f800-0x26ffff 特に意味はない
     int i;
 
     for (i=0; i < 8192; i++){
         set_segmdesc(gdt + i, 0, 0, 0);
     }
     set_segmdesc(gdt + 1, 0xffffffff, 0x00000000, 0x4092);
-    set_segmdesc(gdt + 2, 0x0007ffff, 0x00280000, 0x409a);
+    set_segmdesc(gdt + 2, 0x0007ffff, 0x00280000, 0x409a); // このセグメントを使うとbootpack.hrbを実行できる
     load_gdtr(0xffff, 0x00270000);
 
     for (i=0; i <256; i++){
@@ -269,6 +271,7 @@ void init_gdtidt(void)
 }
 
 void set_segmdesc(struct SegmentDescriptor * sd, unsigned int limit, int base, int ar)
+// limit: セグメントのバイト数-1, base: 番地, ar: アクセス権限
 {
     if (limit > 0xffff){
         ar |= 0x8000;
