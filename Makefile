@@ -1,45 +1,52 @@
+CC = gcc
+CFLAGS = -m32 -march=i486 -nostdlib
+
 default:
 	make img
 
 convHankakuTxt : convHankakuTxt.c
-	gcc $< -o $@
+	$(CC) $< -o $@
 
 hankaku.c : hankaku.txt convHankakuTxt
 	./convHankakuTxt
 
-ipl10.bin : ipl10.asm Makefile
-	nasm ipl10.asm -o ipl10.bin -l ipl10.lst
+ipl10.bin : ipl10.asm
+	nasm $< -o $@ -l ipl10.lst
 
-asmhead.bin : asmhead.asm Makefile
-	nasm asmhead.asm -o asmhead.bin -l asmhead.lst
+asmhead.bin : asmhead.asm
+	nasm $< -o $@ -l asmhead.lst
 
-nasmfunc.o : nasmfunc.asm Makefile
-	nasm -g -f elf nasmfunc.asm -o nasmfunc.o
+nasmfunc.o : nasmfunc.asm
+	nasm -g -f elf $< -o $@ -l nasmfunc.lst
 
-#hankaku.o : hankaku.c
-#	gcc -march=i486 -m32 -nostdlib hankaku.c -o hankaku.o
+bootpack.hrb : bootpack.c har.ld hankaku.c nasmfunc.o mysprintf.c graphic.c dsctbl.c
+	$(CC) $(CFLAGS) -fno-pie -T har.ld bootpack.c nasmfunc.o hankaku.c mysprintf.c graphic.c dsctbl.c -o bootpack.hrb
 
 #bootpack.o : bootpack.c
-#	gcc -march=i486 -m32 -nostdlib bootpack.c -o bootpack.o
-
+#	$(CC) $(CFLAGS) $< -o $@
+#hankaku.o : hankaku.c
+#	$(CC) $(CFLAGS) $< -o $@
 #mysprintf.o : mysprintf.c
-#	gcc -march=i486 -m32 -nostdlib $^ -o $@
+#	$(CC) $(CFLAGS) $^ -o $@
+#graphic.o : graphic.c
+#	$(CC) $(CFLAGS) $< -o $@
+#dsctbl.o : dsctbl.c
+#	$(CC) $(CFLAGS) $< -o $@
+#
+#OBJS_BOOTPACK = bootpack.o hankaku.o nasmfunc.o mysprintf.o graphic.o dsctbl.o
+#
+#bootpack.hrb : $(OBJS_BOOTPACK) har.ld
+#	ld -m elf_i386 -T har.ld $(OBJS_BOOTPACK) -o $@
 
-bootpack.hrb : bootpack.c har.ld hankaku.c nasmfunc.o mysprintf.c Makefile
-	gcc -march=i486 -m32 -nostdlib -fno-pie -T har.ld bootpack.c nasmfunc.o hankaku.c mysprintf.c -o bootpack.hrb
-
-haribote.sys : asmhead.bin bootpack.hrb  Makefile
+haribote.sys : asmhead.bin bootpack.hrb
 	cat asmhead.bin bootpack.hrb > haribote.sys
 
-haribote.img : ipl10.bin haribote.sys Makefile
+haribote.img : ipl10.bin haribote.sys
 	mformat -f 1440 -C -B ipl10.bin -i haribote.img ::
 	mcopy haribote.sys -i haribote.img ::
 
-asm :
-	make -r ipl10.bin
-
 img :
-	make -r haribote.img
+	make haribote.img
 
 run :
 	make img
